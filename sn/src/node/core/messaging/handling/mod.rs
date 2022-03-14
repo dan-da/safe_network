@@ -476,7 +476,6 @@ impl Node {
                                         section_chain,
                                         signed_sap,
                                         Some(prefix_map),
-                                        None,
                                     )?;
                                     let _ = new_network_knowledge.merge_members(
                                         members
