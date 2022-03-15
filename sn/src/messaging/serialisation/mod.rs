@@ -62,7 +62,10 @@ impl MsgType {
     pub fn priority(&self) -> i32 {
         match self {
             MsgType::System {
-                msg: SystemMsg::JoinResponse(_) | SystemMsg::JoinAsRelocatedResponse(_),
+                msg:
+                    SystemMsg::JoinResponse(_)
+                    | SystemMsg::JoinAsRelocatedResponse(_)
+                    | SystemMsg::Membership(_), // TODO: should membership have same priority as join?
                 ..
             } => JOIN_RESPONSE_PRIORITY,
             // DKG messages

@@ -19,6 +19,7 @@ pub use join_as_relocated::{JoinAsRelocatedRequest, JoinAsRelocatedResponse};
 pub use node_msgs::{NodeCmd, NodeEvent, NodeQuery, NodeQueryResponse};
 pub use node_state::{MembershipState, NodeState, RelocateDetails};
 pub use signed::{KeyedSig, SigShare};
+use sn_membership::SignedVote;
 
 /// List of peers of a section
 pub type SectionPeers = BTreeSet<SectionAuth<NodeState>>;
@@ -91,6 +92,8 @@ pub enum SystemMsg {
     BackPressure(LoadReport),
     /// Send from a section to the node to be immediately relocated.
     Relocate(SectionAuth<NodeState>),
+    /// Membership Vote
+    Membership(SignedVote<NodeState>),
     /// Sent from a bootstrapping peer to the section requesting to join as a new member
     JoinRequest(Box<JoinRequest>),
     /// Response to a `JoinRequest`

@@ -10,6 +10,7 @@ mod agreement;
 mod anti_entropy;
 mod dkg;
 mod join;
+mod membership;
 mod proposals;
 mod relocation;
 mod resource_proof;
@@ -575,6 +576,7 @@ impl Node {
                 self.handle_join_as_relocated_request(sender, *join_request, known_keys)
                     .await
             }
+            SystemMsg::Membership(vote) => self.handle_membership_vote(sender, vote).await,
             SystemMsg::Propose {
                 proposal,
                 sig_share,
