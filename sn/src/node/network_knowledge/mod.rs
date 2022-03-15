@@ -160,7 +160,6 @@ impl NetworkKnowledge {
         peer: Peer,
         genesis_sk_set: bls::SecretKeySet,
     ) -> Result<(NetworkKnowledge, SectionKeyShare)> {
-        let num_genesis_nodes = 1;
         let public_key_set = genesis_sk_set.public_keys();
         let secret_key_index = 0u8;
         let secret_key_share = genesis_sk_set.secret_key_share(secret_key_index as u64);

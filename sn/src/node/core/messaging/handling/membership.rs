@@ -6,23 +6,12 @@
 // KIND, either express or implied. Please review the Licences for the specific language governing
 // permissions and limitations relating to use of the SAFE Network Software.
 
-use crate::elder_count;
-use crate::messaging::system::{
-    JoinAsRelocatedRequest, JoinAsRelocatedResponse, JoinRejectionReason, JoinRequest,
-    JoinResponse, MembershipState, NodeState, SystemMsg,
-};
-use crate::node::{
-    api::cmds::Cmd,
-    core::{relocation::RelocateDetailsUtils, Node},
-    Error, Result, SectionAuthUtils, FIRST_SECTION_MAX_AGE, MIN_ADULT_AGE,
-};
-use crate::types::{log_markers::LogMarker, Peer};
+use crate::messaging::system::{NodeState, SystemMsg};
+use crate::node::{api::cmds::Cmd, core::Node, Result, SectionAuthUtils};
+use crate::types::Peer;
 
-use bls::PublicKey as BlsPublicKey;
 use sn_membership::{SignedVote, VoteResponse};
 use std::vec;
-
-const FIRST_SECTION_MIN_ELDER_AGE: u8 = 90;
 
 // Message handling
 impl Node {
@@ -52,11 +41,6 @@ impl Node {
             assert!(self.is_not_elder().await);
             vec![]
         };
-
-        // .unwrap_or_else(|| {
-        //     assert!(self.is_not_elder().await);
-        //     vec![]
-        // });
 
         Ok(cmds)
     }
